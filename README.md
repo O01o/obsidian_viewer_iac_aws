@@ -1,0 +1,1 @@
+# aws_common_resource
