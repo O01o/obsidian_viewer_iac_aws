@@ -1,0 +1,20 @@
+# Terraform
+.terraform/
+.terraform.lock.hcl
+
+# Local configuration and variables
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# State files and backups
+terraform.tfstate
+terraform.tfstate.*
+crash.log
+crash.*.log
+
+# Secrets
+*.tfsec
