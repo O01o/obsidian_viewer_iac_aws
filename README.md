@@ -10,12 +10,13 @@ Obsidian Vault を管理しているリポジトリの GitHub Actions から S3 
 AWS 環境および Terraform のインストールを事前に行ってください。  
 プロジェクト直下に `terraform.tfvars` を作成し、以下の必要な環境変数を設定してください。  
 
-- `AWS_ACCESS_KEY`
-- `AWS_SECRET_KEY`
-- `REGION`
-- `GITHUB_USER_NAME`
-- `GITHUB_REPOSITORY_NAME`
-- `BUCKET_NAME`
+- aws_access_key
+- aws_secret_key
+- region
+- github_user_name
+- github_repository_name
+- bucket_name
+
 
 ## 実行手順
 
