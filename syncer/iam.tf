@@ -1,22 +1,13 @@
-data "http" "github_actions_openid_configuration" {
-  url = "https://token.actions.githubusercontent.com/.well-known/openid-configuration"
-}
-
-data "tls_certificate" "github_actions" {
-  url = jsondecode(data.http.github_actions_openid_configuration.response_body).jwks_uri
-}
-
-resource "aws_iam_openid_connect_provider" "github_actions" {
-  url             = "https://token.actions.githubusercontent.com"
-  client_id_list  = ["sts.amazonaws.com"]
-  thumbprint_list = data.tls_certificate.github_actions.certificates[*].sha1_fingerprint
+data "aws_iam_openid_connect_provider" "github_actions" {
+  url = "https://token.actions.githubusercontent.com"
 }
 
 resource "aws_iam_role" "github_actions" {
-  name = "github-actions-s3-deploy-role"
+  name = "github-actions-s3-deploy-${var.bucket_name}"
 
   assume_role_policy = templatefile("./syncer/iam_role_github_actions.json", {
-    github_actions_arn = aws_iam_openid_connect_provider.github_actions.arn,
+    # dataソースから取得したARNを参照する
+    github_actions_arn = data.aws_iam_openid_connect_provider.github_actions.arn,
     github_user_name = var.github_user_name,
     github_repository_name = var.github_repository_name,
   })
