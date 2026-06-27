@@ -12,13 +12,10 @@ variable "region" {
   type = string
 }
 
-variable "github_user_name" {
-  type = string
-}
-
 variable "sites" {
   description = "Deploy targets (GitHub repository + S3 bucket)"
   type = list(object({
+    github_user_name = string
     github_repository_name = string
     bucket_name            = string
   }))

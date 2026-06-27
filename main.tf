@@ -20,7 +20,7 @@ module "syncer" {
     for s in var.sites : s.github_repository_name => s
   }
 
-  github_user_name       = var.github_user_name
+  github_user_name       = each.value.github_user_name
   github_repository_name = each.value.github_repository_name
   bucket_name            = each.value.bucket_name
 }
